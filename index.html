@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Menu Management</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color:red;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: black;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid blue;
+      margin-right: 10px;
+      width: 200px;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      border-color: #4CAF50;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #menu-list {
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+    }
+
+    .menu-item {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      font-size: 16px;
+      color: gold;
+      transition: background-color 0.3s ease;
+    }
+
+    .menu-item:hover {
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Restaurant Menu Management</h1>
+    <form id="menu-form">
+      <input type="text" id="name" placeholder="Item Name">
+      <input type="text" id="price" placeholder="Price">
+      <button type="button" onclick="addItem()">Add Item</button>
+    </form>
+    <div id="menu-list"></div>
+  </div>
+
+  <script>
+    let menuItems = [
+      { name: 'Masala Papad', price: '30' },
+      { name: 'Veg Manchurian', price: '60' },
+      { name: 'Paneer Butter Masala', price: '140' },
+      { name: 'Veg Maratha', price: '150' },
+      { name: 'Veg Kolhapuri', price: '130' },
+      { name: 'Chicken Masala', price: '180' },
+      { name: 'Butter Chicken', price: '200' },
+      { name: 'Tandoor Roti', price: '20' },
+      { name: 'Butter Naan', price: '35' },
+      { name: 'Mango Shake', price: '40' }
+    ];
+
+    function renderMenu() {
+      const menuList = document.getElementById('menu-list');
+      menuList.innerHTML = '';
+      menuItems.forEach(item => {
+        const menuItemElement = document.createElement('div');
+        menuItemElement.classList.add('menu-item');
+        menuItemElement.textContent = `${item.name} - Rs.${item.price}`;
+        menuList.appendChild(menuItemElement);
+      });
+    }
+
+    function addItem() {
+      const nameInput = document.getElementById('name');
+      const priceInput = document.getElementById('price');
+      const name = nameInput.value.trim();
+      const price = priceInput.value.trim();
+
+      if (name && price) {
+        const newItem = { name, price };
+        menuItems.push(newItem);
+        renderMenu();
+        nameInput.value = '';
+        priceInput.value = '';
+      } else {
+        alert('Please enter item name and price.');
+      }
+    }
+
+    renderMenu();
+  </script>
+</body>
+</html>
+
+
+
